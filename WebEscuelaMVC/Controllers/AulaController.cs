@@ -11,10 +11,9 @@ namespace WebEscuelaMVC.Controllers
 {
     public class AulaController : Controller
     {
-       
+
         private EscuelaDBMVC context = new EscuelaDBMVC();
 
-     
         // GET: Aula
         public ActionResult Index()
         {
@@ -23,7 +22,7 @@ namespace WebEscuelaMVC.Controllers
         }
 
 
-       
+
         //GET: Aula/Create
         public ActionResult Create()
         {
@@ -41,24 +40,50 @@ namespace WebEscuelaMVC.Controllers
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View("Create");
+            return View("Register", aula);
 
         }
 
-        //***BUSCA AULA POR ID***
+
         //GET: Aula/id
-        public ActionResult Detail(int id)
+        public ActionResult Details(int id)
         {
             Aula aula = context.Aulas.Find(id);
             if (aula == null)
             {
                 HttpNotFound();
             }
-            return View("Detail", aula);
+            return View("Details", aula);
 
         }
 
-        //edita aula
+
+        //GET
+        public ActionResult Delete(int id)
+        {
+            Aula aula = context.Aulas.Find(id);
+            if (aula == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Delete", aula);
+        }
+
+        [HttpPost]
+        //POST
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Aula aula = context.Aulas.Find(id);
+            if (aula != null)
+            {
+                context.Aulas.Remove(aula);
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+
         //GET:Aula/Edit/id
         public ActionResult Edit(int id)
         {
@@ -72,19 +97,26 @@ namespace WebEscuelaMVC.Controllers
             return View("Edit", aula);
 
         }
+
         //POST : Aula/Edit/id
         [HttpPost]
-        public ActionResult EditConfirmed(int id)
-        {
-            Aula aula = context.Aulas.Find(id);
 
-            context.Entry(aula).State = EntityState.Modified;
-            context.SaveChanges();
-            return View("Modificar", aula);
+        public ActionResult Edit(Aula aula)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                context.Entry(aula).State = EntityState.Modified;
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(aula);
 
         }
 
-        
+
         public ActionResult ListarPorEstado(string estado)
         {
             List<Aula> aulaEstado = (from e in context.Aulas where estado == e.Estado select e).ToList();
@@ -92,7 +124,7 @@ namespace WebEscuelaMVC.Controllers
 
         }
 
-     
+
         public ActionResult TraerPorNumero(int num)
         {
             dynamic aulaNum = (from a in context.Aulas where num == a.Numero select a).ToList();

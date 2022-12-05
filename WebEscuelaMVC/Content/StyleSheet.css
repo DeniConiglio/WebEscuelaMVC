@@ -1,0 +1,47 @@
+﻿body {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    width: 1200px;
+    color:white;
+    background-color:pink;
+}
+
+section {
+    display: flex;
+    text-align:center;
+}
+
+nav {
+    height: 100px;
+    background-color: deeppink;
+}
+
+a{
+    color:pink;
+}
+a:hover{
+    color:deeppink;
+}
+
+.link{
+    text-align:left;
+}
+
+header {
+    width: 100%;
+    height: 50%;
+    background-color: black;
+    padding: 20.7%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+table{
+    justify-content:center;
+}
+
+footer {
+    height: 55px;
+    background-color: #f74780;
+}

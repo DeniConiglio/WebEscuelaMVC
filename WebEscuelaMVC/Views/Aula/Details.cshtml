@@ -1,0 +1,25 @@
+﻿@model WebEscuelaMVC.Models.Aula
+
+
+<fieldset>
+    <legend>Detalles de Aula</legend>
+    <div>
+        @Html.DisplayNameFor(m => m.Id)
+    </div>
+    <div>
+        @Html.DisplayFor(m => m.Id)
+    </div>
+    <div>
+        @Html.DisplayNameFor(m => m.Numero)
+    </div>
+    <div>
+        @Html.DisplayFor(m => m.Numero)
+    </div>
+    <div>
+        @Html.DisplayNameFor(m => m.Estado)
+    </div>
+    <div>
+        @Html.DisplayFor(m => m.Estado)
+    </div>
+</fieldset>
+<p>@Html.ActionLink("Volver al Index", "Index", "Aula")</p>

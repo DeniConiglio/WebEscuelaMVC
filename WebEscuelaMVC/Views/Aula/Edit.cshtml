@@ -1,0 +1,21 @@
+﻿@model WebEscuelaMVC.Models.Aula
+
+
+<h2>@Model.Id</h2>
+@using (Html.BeginForm("Edit", "Aula", FormMethod.Post))
+{
+    <p>
+        @Html.LabelFor(m => m.Numero)
+        @Html.EditorFor(m => m.Numero)
+        @Html.ValidationMessageFor(m => m.Numero)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Estado)
+        @Html.EditorFor(m => m.Estado)
+        @Html.ValidationMessageFor(m => m.Estado)
+    </p>
+    <input type="submit" name="Edit" value="Editar" />
+}
+<div>
+    <p>@Html.ActionLink("Volver al Index", "Index", "Aula")</p>
+</div>
